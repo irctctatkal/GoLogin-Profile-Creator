@@ -1,3 +1,18 @@
+// Modal handling functions
+const showModal = (message, isError = false) => {
+    const modal = document.getElementById('modal');
+    const modalMessage = document.getElementById('modal-message');
+    modalMessage.textContent = message;
+    modal.style.display = 'flex';
+    modalMessage.style.color = isError ? '#ff5555' : '#00ff88';
+};
+
+const closeModal = () => {
+    document.getElementById('modal').style.display = 'none';
+};
+
+document.getElementById('modal-close').addEventListener('click', closeModal);
+
 document.getElementById('create-profiles').addEventListener('click', async () => {
     const bearerToken = document.getElementById('bearer-token').value.trim();
     const profileCount = parseInt(document.getElementById('profile-count').value);
@@ -5,14 +20,14 @@ document.getElementById('create-profiles').addEventListener('click', async () =>
 
     // Validate inputs
     if (!bearerToken) {
-        statusElement.textContent = 'Please enter a valid API token.';
-        statusElement.className = 'status error';
+        showModal('Please enter a valid API token.', true);
+        statusElement.textContent = '';
         return;
     }
 
     if (isNaN(profileCount) || profileCount <= 0) {
-        statusElement.textContent = 'Please enter a valid number of profiles.';
-        statusElement.className = 'status error';
+        showModal('Please enter a valid number of profiles.', true);
+        statusElement.textContent = '';
         return;
     }
 
@@ -375,18 +390,25 @@ document.getElementById('create-profiles').addEventListener('click', async () =>
             });
 
             if (!response.ok) {
-                throw new Error(`Failed to create profile ${n}: ${response.statusText}`);
+                if (response.status === 401) {
+                    showModal('Enter Valid API Key', true);
+                } else {
+                    showModal(`Failed to create profile ${n}: ${response.statusText}`, true);
+                }
+                statusElement.textContent = '';
+                return;
             }
 
             statusElement.textContent = `Profile ${n} of ${profileCount} created successfully.`;
             statusElement.className = 'status success';
         } catch (error) {
-            statusElement.textContent = error.message;
-            statusElement.className = 'status error';
+            showModal(`Error creating profile ${n}: ${error.message}`, true);
+            statusElement.textContent = '';
             return;
         }
     }
 
+    showModal(`Profiles Created! Refresh your GoLogin home page to see the profiles. Total profiles created: ${profileCount}`, false);
     statusElement.textContent = `Finished creating ${profileCount} profiles!`;
     statusElement.className = 'status success';
 });
