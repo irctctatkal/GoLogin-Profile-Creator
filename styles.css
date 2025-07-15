@@ -48,7 +48,7 @@ label {
     color: #a0a0c0;
 }
 
-input {
+input, select {
     width: 100%;
     padding: 0.8rem;
     border: none;
@@ -59,7 +59,15 @@ input {
     transition: background 0.3s, transform 0.2s;
 }
 
-input:focus {
+select {
+    appearance: none;
+    background-image: url('data:image/svg+xml;utf8,<svg fill="%23a0a0c0" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 0.8rem center;
+    background-size: 1.2rem;
+}
+
+input:focus, select:focus {
     outline: none;
     background: #454570;
     transform: scale(1.02);
