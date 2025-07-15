@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Brahmos Profile Creator</title>
+    <title>GoLogin Profile Creator</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
-        <h1>BRAHMOS GoLogin Profile Creator</h1>
+        <h1>GoLogin Profile Creator</h1>
         <div class="input-group">
             <label for="bearer-token">GoLogin API Token</label>
             <input type="text" id="bearer-token" placeholder="Enter your API token" required>
@@ -16,6 +16,14 @@
         <div class="input-group">
             <label for="profile-count">Number of Profiles</label>
             <input type="number" id="profile-count" placeholder="Enter number of profiles" min="1" required>
+        </div>
+        <div class="input-group">
+            <label for="os-select">Operating System</label>
+            <select id="os-select" required>
+                <option value="" disabled selected>Select OS</option>
+                <option value="windows">Windows</option>
+                <option value="macos">macOS</option>
+            </select>
         </div>
         <button id="create-profiles">Create Profiles</button>
         <div id="status" class="status"></div>
