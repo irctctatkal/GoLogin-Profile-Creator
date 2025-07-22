@@ -1,4 +1,4 @@
-* {
+ {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -48,7 +48,7 @@ label {
     color: #a0a0c0;
 }
 
-input, select {
+input {
     width: 100%;
     padding: 0.8rem;
     border: none;
@@ -59,15 +59,7 @@ input, select {
     transition: background 0.3s, transform 0.2s;
 }
 
-select {
-    appearance: none;
-    background-image: url('data:image/svg+xml;utf8,<svg fill="%23a0a0c0" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>');
-    background-repeat: no-repeat;
-    background-position: right 0.8rem center;
-    background-size: 1.2rem;
-}
-
-input:focus, select:focus {
+input:focus {
     outline: none;
     background: #454570;
     transform: scale(1.02);
@@ -113,63 +105,6 @@ button:active {
     color: #ff5555;
 }
 
-/* Modal Styles */
-.modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.7);
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-}
-
-.modal-content {
-    background: #2e2e4a;
-    padding: 2rem;
-    border-radius: 12px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-    max-width: 400px;
-    width: 90%;
-    text-align: center;
-    animation: modalFadeIn 0.3s ease-in-out;
-}
-
-@keyframes modalFadeIn {
-    from { opacity: 0; transform: scale(0.8); }
-    to { opacity: 1; transform: scale(1); }
-}
-
-#modal-message {
-    display: block;
-    font-size: 1rem;
-    margin-bottom: 1.5rem;
-    color: #ffffff;
-}
-
-#modal-close {
-    padding: 0.6rem 1.2rem;
-    border: none;
-    border-radius: 8px;
-    background: linear-gradient(90deg, #ff5555, #ff2a2a);
-    color: #ffffff;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background 0.3s, transform 0.2s;
-}
-
-#modal-close:hover {
-    background: linear-gradient(90deg, #ff2a2a, #cc0000);
-    transform: translateY(-2px);
-}
-
-#modal-close:active {
-    transform: translateY(0);
-}
-
 @media (max-width: 480px) {
     .container {
         padding: 1.5rem;
@@ -178,10 +113,5 @@ button:active {
 
     h1 {
         font-size: 1.5rem;
-    }
-
-    .modal-content {
-        padding: 1.5rem;
-        width: 95%;
     }
 }
