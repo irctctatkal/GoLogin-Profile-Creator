@@ -20,54 +20,40 @@ document.getElementById('create-profiles').addEventListener('click', async () =>
     statusElement.className = 'status';
 
     // Generate random string for platform
-    const generateRandomString = (length) => {
-        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-        let result = '';
-        for (let i = 0; i < length; i++) {
-            result += chars.charAt(Math.floor(Math.random() * chars.length));
-        }
-        return result;
+    const generateRandomString = () => {
+        const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        const uniqueNum = new Date().toTimeString().slice(0, 6).replace(/:/g, '');
+        const getRandomChar = () => alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+        return `Linux ${getRandomChar()}${getRandomChar()}${getRandomChar()}${uniqueNum}`;
     };
 
     // Profile creation loop
     for (let n = 1; n <= profileCount; n++) {
         statusElement.textContent = `Creating profile ${n} of ${profileCount}`;
         
-        const randNum = Math.floor(Math.random() * 1000);
-        const randName = `BRAHMOS ${randNum}`;
-        const linuxPart = generateRandomString(4);
-        const randDigits = Math.floor(Math.random() * 100);
-        const randPlatform = `Linux kf${linuxPart}${randDigits}`;
+        const randNum = Math.floor(Math.random() * 9999) + 1;
+        const randName = `Brahmos IRCTC ${randNum}`;
+        const randPlatform = generateRandomString();
 
-        // Profile JSON data (same as in batch file)
+        // Profile JSON data
         const profileData = {
             name: randName,
             notes: "",
             browserType: "chrome",
-            canBeRunning: true,
             os: "android",
-            osSpec: "",
-            startUrl: "chrome://extensions",
-            autoLang: true,
-            bookmarks: {
-                bookmark_bar: { children: [], date_added: "13396587745173534", date_last_used: "0", date_modified: "13396587745173535", guid: "0bc5d13f-2cba-5d74-951f-3f233fe6c908", id: "1", name: "बुकमार्क बार", type: "folder" },
-                other: { children: [], date_added: "13396587745173538", date_last_used: "0", date_modified: "13396587745173539", guid: "82b081ec-3dd3-529c-8475-ab6c344590dd", id: "2", name: "अन्य बुकमार्क", type: "folder" },
-                synced: { children: [], date_added: "13396587745173541", date_last_used: "0", date_modified: "13396587745173541", guid: "4cf2e351-0e85-532b-bb37-df045d8f8d0f", id: "3", name: "मोबाइल बुकमार्क", type: "folder" }
-            },
-            googleServicesEnabled: false,
-            isBookmarksSynced: true,
+            autoLang: false,
             launchArguments: "",
             lockEnabled: false,
-            debugMode: false,
+            devicePixelRatio: 1.5,
             navigator: {
-                userAgent: "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.7049.41 Safari/537.36",
-                resolution: "1280x800",
-                language: "en-US,en;q=0.9",
+                userAgent: "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.7151.56 Safari/537.36",
+                resolution: "1920x1080",
+                language: "en-US",
                 platform: randPlatform,
                 hardwareConcurrency: 64,
-                doNotTrack: false,
+                doNotTrack: true,
                 deviceMemory: 8,
-                maxTouchPoints: 5
+                maxTouchPoints: 6
             },
             storage: {
                 local: false,
@@ -79,10 +65,6 @@ document.getElementById('create-profiles').addEventListener('click', async () =>
                 indexedDb: false,
                 enableExternalExtensions: false
             },
-            proxyEnabled: false,
-            autoProxyServer: "",
-            autoProxyUsername: "",
-            autoProxyPassword: "",
             proxy: {
                 mode: "none",
                 host: "",
@@ -92,10 +74,10 @@ document.getElementById('create-profiles').addEventListener('click', async () =>
                 autoProxyRegion: "us",
                 torProxyRegion: "us"
             },
-            dns: "",
+            proxyEnabled: false,
             plugins: {
                 enableVulnerable: false,
-                enableFlash: true
+                enableFlash: false
             },
             timezone: {
                 enabled: true,
@@ -103,22 +85,17 @@ document.getElementById('create-profiles').addEventListener('click', async () =>
                 timezone: ""
             },
             geolocation: {
-                mode: "block",
+                isCustomCoordinates: false,
+                mode: "allow",
                 enabled: true,
-                customize: true,
-                fillBasedOnIp: true,
-                latitude: 0,
-                longitude: 0,
-                accuracy: 10,
-                isCustomCoordinates: false
+                customize: false,
+                fillBasedOnIp: true
             },
             audioContext: {
-                mode: "off",
-                noise: 1.595416106475e-8
+                mode: "noise"
             },
             canvas: {
-                mode: "off",
-                noise: 0.48791235
+                mode: "noise"
             },
             fonts: {
                 enableMasking: true,
@@ -126,46 +103,18 @@ document.getElementById('create-profiles').addEventListener('click', async () =>
                 families: ["Arial", "Courier", "Courier New", "Georgia", "Helvetica", "Monaco", "Palatino", "Tahoma", "Times", "Times New Roman", "Verdana", "Baskerville"]
             },
             mediaDevices: {
-                enableMasking: false,
-                uid: "14cd2c00496e4a4385232db64c55651385080ce686a34991b601543c39",
-                videoInputs: 0,
-                audioInputs: 0,
-                audioOutputs: 0
+                enableMasking: true,
+                videoInputs: 2,
+                audioInputs: 1,
+                audioOutputs: 1
             },
             webRTC: {
-                enable: false,
                 isEmptyIceList: true,
-                mode: "disabled",
-                enabled: true,
-                customize: true,
-                localIpMasking: false,
-                fillBasedOnIp: true,
-                publicIp: "",
-                localIps: []
-            },
-            webGL: {
-                mode: "off",
-                getClientRectsNoise: 2.92221,
-                noise: 24.477
-            },
-            webGpu: {
-                api: {
-                    gpu: true,
-                    adapter: true,
-                    compat: true,
-                    device: true,
-                    context: true,
-                    offscreen: true,
-                    twoD: true
-                },
-                supportedAdapters: {
-                    fallback: null,
-                    highPerformance: null
-                }
+                mode: "real",
+                enable: true
             },
             clientRects: {
-                mode: "off",
-                noise: 2.92221
+                mode: "noise"
             },
             webGLMetadata: {
                 mode: "mask",
@@ -271,8 +220,8 @@ document.getElementById('create-profiles').addEventListener('click', async () =>
                     { name: "BLUE_BITS", value: 8 },
                     { name: "DEPTH_BITS", value: 24 },
                     { name: "GREEN_BITS", value: 8 },
-                    { name: "MAX_3D_TEXTURE_SIZE", value: 4096 },
-                    { name: "MAX_ARRAY_TEXTURE_LAYERS", value: 256 },
+                    { name: "MAX_3D_TEXTURE_SIZE", value: 16383 },
+                    { name: "MAX_ARRAY_TEXTURE_LAYERS", value: 4096 },
                     { name: "MAX_COLOR_ATTACHMENTS", value: 4 },
                     { name: "MAX_COMBINED_FRAGMENT_UNIFORM_COMPONENTS", value: 606208 },
                     { name: "MAX_COMBINED_TEXTURE_IMAGE_UNITS", value: 96 },
@@ -285,7 +234,7 @@ document.getElementById('create-profiles').addEventListener('click', async () =>
                     { name: "MAX_FRAGMENT_UNIFORM_COMPONENTS", value: 16384 },
                     { name: "MAX_FRAGMENT_UNIFORM_VECTORS", value: 4096 },
                     { name: "MAX_PROGRAM_TEXEL_OFFSET", value: 7 },
-                    { name: "MAX_RENDERBUFFER_SIZE", value: 8192 },
+                    { name: "MAX_RENDERBUFFER_SIZE", value: 16383 },
                     { name: "MAX_SAMPLES", value: 4 },
                     { name: "MAX_TEXTURE_IMAGE_UNITS", value: 16 },
                     { name: "MAX_TEXTURE_LOD_BIAS", value: 256 },
@@ -297,13 +246,13 @@ document.getElementById('create-profiles').addEventListener('click', async () =>
                     { name: "MAX_UNIFORM_BUFFER_BINDINGS", value: 216 },
                     { name: "MAX_VARYING_COMPONENTS", value: 124 },
                     { name: "MAX_VARYING_VECTORS", value: 31 },
-                    { name: "MAX_VERTEX_ATTRIBS", value: 16 },
+                    { name: "MAX_VERTEX_ATTRIBS", value: 32 },
                     { name: "MAX_VERTEX_OUTPUT_COMPONENTS", value: 128 },
                     { name: "MAX_VERTEX_TEXTURE_IMAGE_UNITS", value: 16 },
                     { name: "MAX_VERTEX_UNIFORM_BLOCKS", value: 36 },
                     { name: "MAX_VERTEX_UNIFORM_COMPONENTS", value: 16384 },
                     { name: "MAX_VERTEX_UNIFORM_VECTORS", value: 4096 },
-                    { name: "MAX_VIEWPORT_DIMS", value: { "0": 8192, "1": 8192 } },
+                    { name: "MAX_VIEWPORT_DIMS", value: { "0": 16383, "1": 16383 } },
                     { name: "MIN_PROGRAM_TEXEL_OFFSET", value: -8 },
                     { name: "RED_BITS", value: 8 },
                     { name: "RENDERER", value: "WebKit WebGL" },
@@ -314,11 +263,12 @@ document.getElementById('create-profiles').addEventListener('click', async () =>
                     { name: "VERSION", value: "WebGL 2.0 (OpenGL ES 3.0 Chromium)" }
                 ],
                 antialiasing: true,
-                textureMaxAnisotropyExt: 0,
+                textureMaxAnisotropyExt: 16,
                 shaiderPrecisionFormat: "highp/highp",
                 extensions: [
                     "EXT_color_buffer_float",
                     "EXT_float_blend",
+                    "EXT_texture_filter_anisotropic",
                     "WEBGL_compressed_texture_astc",
                     "WEBGL_compressed_texture_etc",
                     "WEBGL_compressed_texture_etc1",
@@ -333,35 +283,8 @@ document.getElementById('create-profiles').addEventListener('click', async () =>
                 preloadCustom: true,
                 names: []
             },
-            s3Path: "686f23d69335e14fb272217e/4a784fc2-01c2-4b10-b517-372d8aad68ee",
-            s3Date: "2025-07-10T05:47:13.097Z",
-            devicePixelRatio: 1.5,
-            owner: "686dd60f1029f294a66ff3a0",
-            checkCookies: true,
             chromeExtensions: [],
-            userChromeExtensions: [],
-            permissions: {
-                transferProfile: true,
-                transferToMyWorkspace: true,
-                shareProfile: true,
-                manageFolders: true,
-                editProfile: true,
-                deleteProfile: true,
-                cloneProfile: true,
-                exportProfile: true,
-                updateUA: true,
-                addVpnUfoProxy: true,
-                runProfile: true,
-                runProfileWeb: true,
-                viewProfile: true,
-                addProfileTag: true,
-                removeProfileTag: true,
-                viewShareLinks: true,
-                createShareLinks: true,
-                updateShareLinks: true,
-                deleteShareLinks: true,
-                viewCustomExtensions: true
-            }
+            userChromeExtensions: []
         };
 
         try {
