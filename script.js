@@ -11,7 +11,7 @@ document.getElementById('create-profiles').addEventListener('click', async () =>
     }
 
     if (isNaN(profileCount) || profileCount <= 0) {
-        statusElement.textContent = 'Please enter a valid number of profiles.';
+        statusElement.textContent = 'Please enter a valid number of profiless.';
         statusElement.className = 'status error';
         return;
     }
