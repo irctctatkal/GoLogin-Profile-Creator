@@ -47,7 +47,7 @@ document.getElementById('create-profiles').addEventListener('click', async () =>
             devicePixelRatio: 1.5,
             navigator: {
                 userAgent: "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.7151.56 Safari/537.36",
-                resolution: "1980*1080",
+                resolution: "1980x1080",
                 language: "en-US",
                 platform: randPlatform,
                 hardwareConcurrency: 64,
